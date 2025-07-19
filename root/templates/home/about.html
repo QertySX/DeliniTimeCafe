@@ -1,0 +1,40 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <!-- about section -->
+  <section class="about_section layout_padding">
+    <div class="container  ">
+
+      <div class="row">
+        <div class="col-md-6 ">
+          <div class="img-box">
+            <img src="{% static 'images/about.jpg' %}" alt="">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <div class="heading_container">
+              <h2>
+                Про нас
+              </h2>
+              <br>
+            </div>
+            <p>
+              DeliniTime — це кафе, створене з любов’ю до якісної кави та затишної атмосфери. Ми почали свій шлях, щоб подарувати кожному можливість зробити паузу в метушні дня і насолодитися моментом.
+              <br>
+              <br>
+              У нашому меню — ретельно підібрані сорти кави та смачні страви, які задовольнять найвибагливіших гостей. Ми віримо, що кава — це не просто напій, а маленький ритуал, який об’єднує людей.
+              <br>
+              <br>
+              У DeliniTime ви завжди знайдете тепле місце для зустрічей з друзями, відпочинку або роботи в комфорті. Запрошуємо вас поринути в атмосферу затишку, смаку та натхнення.
+              <br>  
+              Якщо хочеш, можу зробити текст більш офіційним, креативним або в іншому стилі 
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

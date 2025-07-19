@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual env
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# Byte-compiled / optimized / DLL files
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.manifest
+*.spec
+
+# PyInstaller
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Django
+*.sqlite3
+*.log
+local_settings.py
+db.sqlite3
+media/
+
+# VS Code
+.vscode/
+
+# JetBrains (PyCharm, etc.)
+.idea/
+
+# MacOS
+.DS_Store
+
+# Linux
+*.swp
+
+# dotenv
+.env
+.env.*
+
+# mypy, coverage, pytest
+.mypy_cache/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Node (если используешь frontend)
+node_modules/
+npm-debug.log
+
+# Тестовые и временные файлы
+*.tmp
+*.bak
+*.orig
+*.old
+*.log
+
+# Твой Git-репозиторий
+.git/
