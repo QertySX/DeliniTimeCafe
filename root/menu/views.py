@@ -2,10 +2,19 @@ from django.shortcuts import render
 from .models import Product, Category
 
 def menu(request):
-    product = Product.objects.all()
+    products = Product.objects.all()
+    category = Category.objects.all()
+
+    selected_category_id = request.GET.get('category')
+
+    if selected_category_id:
+        products = products.filter(category__id=selected_category_id)
+
     return render(request, 'menu/menu.html', context={
         'title': 'Меню',
         'page': 'menu',
         'app': 'menu',
-        'product': product
+        'product': products,
+        'category': category,
+        'selected_category_id': selected_category_id,
     })
