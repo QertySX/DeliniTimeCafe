@@ -7,26 +7,27 @@
   <section class="food_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
-        <h2 style="color: orange;">
-          Our Menu
+        <h2 style="color: white;">
+          Menu
         </h2>
       </div>
 
-      <ul class="filters_menu" style="color: orange;">
-        <li class="active" data-filter="*" style="color: orange;">All</li>
-        <li data-filter=".burger">Кава</li>
-        <li data-filter=".pizza">Паста</li>
-        <li data-filter=".pasta">Коктейль Б/А</li>
-        <li data-filter=".fries"></li>
+      <!-- фильтр по категориям -->
+      <ul class="filters_menu" style="color: white;">
+        <li class="active" data-filter="all">All</li>
+        {% for c in category %}
+          <li data-filter="{{ c.id|stringformat:'s' }}">{{ c.name }}</li>
+        {% endfor %}
+
       </ul>
-      
+
       <div class="filters-content">
         <div class="row grid">
           {% for p in product %}
-            <div class="col-sm-6 col-lg-4 all pizza">
+            <div class="col-sm-6 col-lg-4 all {{ p.category.id }}">
               <div class="box">
                 <div class="menu section img-box">
-                  <img src="{{ p.photo.url }}" alt="{{ p.name }}" style="transform: scale(1.5 );">
+                  <img src="{{ p.photo.url }}" alt="{{ p.name }}" style="transform: scale(1.5);">
                 </div>
                 <div class="detail-box">
                   <h5>{{ p.name }}</h5>
@@ -72,6 +73,11 @@
     </div>
   </section>
   <!-- end food section -->
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/cart.js' %}"></script>
+<script src="{% static 'js/filter_menu.js' %}"></script>
 
 
 {% endblock %}
