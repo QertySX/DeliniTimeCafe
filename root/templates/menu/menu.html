@@ -23,7 +23,7 @@
 
       <div class="filters-content">
         <div class="row grid">
-          {% for p in product %}
+          {% for p in products %}
             <div class="col-sm-6 col-lg-4 all {{ p.category.id }}">
               <div class="box">
                 <div class="menu section img-box">
@@ -66,9 +66,7 @@
       </div>
       
       <div class="btn-box">
-        <a href="">
-          View More
-        </a>
+        <a href="#" id="view-more-btn">View More</a>
       </div>
     </div>
   </section>
@@ -78,6 +76,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'js/cart.js' %}"></script>
 <script src="{% static 'js/filter_menu.js' %}"></script>
+<script src="{% static 'js/menu_view_more.js' %}"></script>
 
 
 {% endblock %}
