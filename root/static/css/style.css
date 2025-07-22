@@ -495,6 +495,10 @@ a:focus {
   margin: 45px 0 20px 0;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .food_section .filters_menu li {
   padding: 7px 25px;
   cursor: pointer;
@@ -540,6 +544,8 @@ a:focus {
   -webkit-transition: all .2s;
   transition: all .2s;
 }
+
+
 
 .food_section .box .detail-box {
   padding: 25px;
