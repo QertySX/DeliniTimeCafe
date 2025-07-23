@@ -133,3 +133,9 @@ EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
 EMAIL_HOST_USER = '3bd79255e3eb55'
 EMAIL_HOST_PASSWORD = '76555bc32814ad'
 EMAIL_PORT = '2525'
+
+# Часовой пояс
+TIME_ZONE = 'Europe/Kyiv'
+
+# Использовать часовые пояса (UTC внутри, локальное при отображении)
+USE_TZ = False
