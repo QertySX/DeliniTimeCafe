@@ -1,0 +1,140 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="order-container">
+    <table class="order-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Замовлення</th>
+                <th>Що саме?</th>
+                <th>Кількість</th>
+                <th>Ціна</th>
+                <th>Дата</th>
+                <th>Підтвердити</th>
+                <th>Видалення</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in user_orders %}
+            <tr>
+                <td class="id-cell">{{ order.id }}</td>
+                <td>{{ order.title }}</td>
+                <td>{{ order.products }}</td>
+                <td>{{ order.amount }}</td>
+                <td class="price-cell">{{ order.price }}</td>
+                <td>{{ order.date }}</td>
+                <td>
+                    <input type="checkbox" class="check" value="yes" checked>
+                </td>
+                <td>
+                    <input type="hidden" value="{{ order.id }}">
+                    <button class="btn btn-warning del-btn">Видалити</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="total-box">
+        Загальна сума до сплати: <span id="total">0.00 грн</span>
+    </div>
+
+    <p style="text-align: center;">
+        <a id="bill-btn" href="/orders/bill/123" class="btn btn-primary">Перейти до замовлення</a>
+    </p>
+</div>
+
+
+<style>
+    body {
+        background-color: #f2f2f2;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .order-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background-color: #f9f9f9;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        padding: 30px;
+    }
+
+    .order-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: white;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .order-table thead {
+        background-color: #f1f1f1;
+    }
+
+    .order-table th,
+    .order-table td {
+        padding: 14px 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+        color: #333;
+    }
+
+    .order-table tbody tr:hover {
+        background-color: #f6faff;
+    }
+
+    .btn-warning {
+        padding: 6px 12px;
+        border-radius: 6px;
+        background-color: #f0ad4e;
+        color: white;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+
+    .btn-warning:hover {
+        background-color: #ec971f;
+    }
+
+    .total-box {
+        margin-top: 30px;
+        background-color: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        font-size: 1.1em;
+        color: #444;
+    }
+
+    .total-box span {
+        font-weight: bold;
+        color: #d9534f;
+    }
+
+    #bill-btn {
+        display: inline-block;
+        margin: 20px auto 0 auto;
+        padding: 10px 22px;
+        border-radius: 10px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        transition: background-color 0.2s ease;
+    }
+
+    #bill-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/calc_orders.js' %}"></script>
+
+{% endblock %}
