@@ -11,7 +11,6 @@ def menu(request):
     if selected_category_id:
         products = products.filter(category__id=selected_category_id)
 
-
     return render(request, 'menu/menu.html', context={
         'title': 'Меню',
         'page': 'menu',
