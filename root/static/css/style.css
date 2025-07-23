@@ -624,6 +624,40 @@ a:focus {
   background-color: #e69c00;
 }
 
+.add-to-cart-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: orange; /* яркий желтый */
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 25px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+
+  /* Убираем тени и переходы */
+  /* transition: background-color 0.3s ease, box-shadow 0.3s ease; */
+  box-shadow: none; /* убираем тень */
+}
+
+.add-to-cart-btn i {
+  font-size: 18px;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #e6a800;
+  box-shadow: none; /* тоже убираем тень при наведении */
+}
+
+.add-to-cart-btn:focus {
+  outline: none;
+  box-shadow: none; /* убираем свечение при фокусе */
+}
+
+
+
 .about_section {
   background: #222831;
   color: #ffffff;
