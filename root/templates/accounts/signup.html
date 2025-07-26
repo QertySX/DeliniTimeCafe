@@ -1,0 +1,89 @@
+{% extends '_layouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<section class="book_section layout_padding" style="min-height: 80vh; display: flex; justify-content: center; align-items: center;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="form_container">
+			<div class="heading_container mb-4" style="text-align: center;">
+  				<h2 style="color: white; margin: 0; text-align: center;">Реєстрація</h2>
+			</div>
+          <form id="form1" method="POST" class="custom-form" onsubmit="return false">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+              <label for="login" class="form-label">Логін:</label>
+              <input type="text" id="login" name="login" class="form-control" required>
+              <span id="login-err" class="error"></span>
+            </div>
+            <div class="form-group mb-3">
+              <label for="pass1" class="form-label">Пароль:</label>
+              <input type="password" id="pass1" name="pass1" class="form-control" required>
+              <span id="pass1-err" class="error"></span>
+            </div>
+            <div class="form-group mb-3">
+              <label for="pass2" class="form-label">Повторіть пароль:</label>
+              <input type="password" id="pass2" name="pass2" class="form-control" required>
+              <span id="pass2-err" class="error"></span>
+            </div>
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Пошта:</label>
+              <input type="email" id="email" name="email" class="form-control" required>
+              <span id="email-err" class="error"></span>
+            </div>
+            <div class="btn_box">
+              <button type="submit" id="submit" class="btn btn-primary w-100">Зареєструватись</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.custom-form {
+  background-color: whitesmoke;
+  padding: 20px 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 100%; /* чтобы заняло всю ширину колонки */
+}
+
+.custom-form .form-group {
+  margin-bottom: 12px; /* чуть меньше отступ между полями */
+}
+
+.custom-form label {
+  font-weight: 600;
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.custom-form .form-control {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-form .btn_box {
+  margin-top: 15px;
+}
+
+.custom-form button.btn {
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{% static 'js/signup.js' %}"></script>
+{% endblock %}

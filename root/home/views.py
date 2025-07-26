@@ -28,6 +28,7 @@ def book(request):
         form_time = request.POST.get('time')
 
         BookTable.objects.create(
+            user=request.user,
             name=form_name,
             phone=form_phone,   
             email=form_email,
@@ -35,9 +36,26 @@ def book(request):
             date=form_date,
             time=form_time
         )
+        return redirect('done')
 
     return render(request, 'reservations/book_table.html', context={
     'title': 'Бронювання',
     'page': 'book_table',
-    'app': 'home'
+    'app': 'home',
+    'user_reserved': BookTable.objects.filter(user_id=request.user.id)
     })
+
+
+def done(request):
+    return render(request, 'reservations/done.html', context={
+    'title': 'Бронювання успішне',
+    'page': 'done',
+    'app': 'home',
+    'user_reserved': BookTable.objects.filter(user_id=request.user.id)
+    })
+
+
+def del_reserv(request, book_table_id):
+    delete_reserv = BookTable.objects.get(id=book_table_id)
+    delete_reserv.delete()
+    return redirect('book_table')

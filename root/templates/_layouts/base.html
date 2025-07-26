@@ -44,18 +44,14 @@
                   <a class="nav-link" href="{% url 'index' %}">Головна <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'menu' %}">Меню</a></li>
-                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Про нас</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'delivery' %}">Замовити</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">Інфо</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'book_table' %}">Бронювання</a></li>
               </ul>
 
               <div class="user_option">
                 <input type="hidden" id="user-id" value="{{ user.id }}">
-                {% if not user.is_authenticated %}
-                  <li><a href="#" style="color: white;"><i class="fa fa-user-o"></i>Гість</a></li>
-                {% else %}
-                  <li><a href="#" style="color: white;"><i class="fa fa-user-o"></i>  {{ user.username }}</a></li>
-                {% endif %}
-                <a class="cart_link" id="count" href="{% url 'reserv' %}">
+                <a class="cart_link" id="count" href="{% url 'cart' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 456.029 456.029">
                     <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
                     c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z"/>
@@ -67,6 +63,15 @@
                     c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z"/>
                   </svg>
                 </a>
+                <ul class="navbar-nav mx-auto">
+                {% if user.is_authenticated %}
+                  <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Профіль</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signout' %}">Вийти</a></li>
+                {% else %}
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signin' %}">Увійти</a></li>
+                  <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Реєстрація</a></li>
+                {% endif %}
+              </ul>
               </div>
             </div>
           </nav>

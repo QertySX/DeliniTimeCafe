@@ -10,7 +10,7 @@ function doCalculate() {
     for (let cell of checkedCells) {
         let parentRow = $(cell).parent().parent();
         totalPrice += parseFloat($(parentRow).find('td.price-cell').text())
-        selIdList += $(parentRow).find('td.id-cell') + ',';
+        selIdList += $(parentRow).find('td.id-cell').text() + ',';
     }
     selIdList += totalPrice;
 
@@ -18,7 +18,6 @@ function doCalculate() {
     console.log(`totalPrice: ${totalPrice}`);
     console.log(`selIdList: ${selIdList}`);
     $('#total').text(`${totalPrice.toFixed(2)}`);
-    $('#bill-btn').attr(`href`, `/orders/bill/${selIdList}`)
 }
 
 

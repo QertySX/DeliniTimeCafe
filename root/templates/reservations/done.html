@@ -1,0 +1,65 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="order-container">
+    <table class="order-table">
+        {% if user_reserved %}
+        <thead>
+            <tr style="text-align: center;">
+                <th>Ваш столик зарезервовано</th>
+            </tr>
+        </thead>
+        {% for reserv in user_reserved %}
+        <tbody>
+            
+            <td style="text-align: center;">
+                <hr width="80%">
+                <br>
+                <p>ID замовлення: {{reserv.id}}</p>
+                <p>Ім'я: {{reserv.name}}</p>
+                <p>Дата: {{reserv.date}}</p>
+                <p>Час: {{reserv.time | time:"H:i"}}</p>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p>Технічна підтримка - 380 444 44 44</p>
+                <a href="{% url 'del_reserv' reserv.id %}" class="btn btn-warning del-btn" onclick="return confirm('Ви дійсно хочете видалити бронювання?')">Видалити</a>
+                <a href="{% url 'index' %}" class="btn btn-warning del-btn">На головну</a>
+            </td>
+        </tbody>
+        {% endfor %}
+        {% else %}
+        <p style="text-align: center; font-size: 1.2em; color: #888; padding: 40px;">
+            У вас немає бронювань
+        </p>
+        <p style="text-align: center;">
+            <a href="{% url 'book_table' %}" class="btn btn-warning del-btn">Забронювати</a>
+        </p>
+        <br>
+
+        </div>
+        {% endif %}
+    </table>
+
+<style>
+    .order-container {
+            max-width: 750px;
+            margin: 40px auto;
+            background-color: whitesmoke;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+</style>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="order-container">
+  <table class="order-table" style="margin: 0 auto; text-align: center;">
+    <thead>
+      <tr>
+        <th>{{title}}</th>
+      </tr>
+      <tr>
+        <th>
+            <hr style="width: 70%; margin: 20px auto;">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+            <br>
+            {% if color == 'red' %}
+                <h4 style="color: red; text-align: center;">{{ message }}</h4>
+            {% else %}
+                <h4 style="color: green; text-align: center">{{ message }}</h4>
+            {% endif %}
+            <br>
+            <br>
+          <div style="padding: 40px 0;">
+            <p>
+              <a href="{% url 'index' %}" class="btn btn-warning del-btn">На головну</a>
+            </p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+    .order-container {
+            max-width: 750px;
+            margin: 40px auto;
+            background-color: whitesmoke;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+        }
+
+        .order-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+</style>
+
+{% endblock %}

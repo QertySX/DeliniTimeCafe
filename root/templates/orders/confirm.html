@@ -1,0 +1,35 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- book section -->
+  <section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h3 style="color: whitesmoke;">
+          Вкажіть вашу пошту для підтвердження 
+        </h3>
+        <hr>
+      </div>
+      <div class="row" style="text-align: center;">
+        <div class="col-md-6">
+          <div class="form_container" style="text-align: center;">
+            <form action="" method="post" style="text-align: center;">
+              {% csrf_token %}
+              <div>
+                <input type="email" class="form-control" placeholder="Ваша пошта" name="email" required>
+              </div>
+              <div class="btn_box">
+                <button type="submit">Підтвердити</button>
+                <button style="-webkit-text-fill-color: white;"><a href="{% url 'cart' %}">Назад</a></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end book section -->
+
+{% endblock %}

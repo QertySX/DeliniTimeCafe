@@ -3,49 +3,56 @@
 
 {% block content %}
 <div class="order-container">
-    <table class="order-table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Замовлення</th>
-                <th>Що саме?</th>
-                <th>Кількість</th>
-                <th>Ціна</th>
-                <th>Дата</th>
-                <th>Підтвердити</th>
-                <th>Видалення</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for order in user_orders %}
-            <tr>
-                <td class="id-cell">{{ order.id }}</td>
-                <td>{{ order.title }}</td>
-                <td>{{ order.products }}</td>
-                <td>{{ order.amount }}</td>
-                <td class="price-cell">{{ order.price }}</td>
-                <td>{{ order.date }}</td>
-                <td>
-                    <input type="checkbox" class="check" value="yes" checked>
-                </td>
-                <td>
-                    <input type="hidden" value="{{ order.id }}">
-                    <button class="btn btn-warning del-btn">Видалити</button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% if user_orders %}
+        <table class="order-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Замовлення</th>
+                    <th>Що саме?</th>
+                    <th>Кількість</th>
+                    <th>Ціна</th>
+                    <th>Дата</th>
+                    <th>Підтвердити</th>
+                    <th>Видалення</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in user_orders %}
+                <tr>
+                    <td class="id-cell">{{ order.id }}</td>
+                    <td>{{ order.title }}</td>
+                    <td>{{ order.products }}</td>
+                    <td>{{ order.amount }}</td>
+                    <td class="price-cell">{{ order.price }}</td>
+                    <td>{{ order.date }}</td>
+                    <td>
+                        <input type="checkbox" class="check" value="yes" checked>
+                    </td>
+                    <td>
+                        <input type="hidden" value="{{ order.id }}">
+                        <a href="{% url 'del_order' order.id %}" class="btn btn-warning del-btn" onclick="return confirm('Ви дійсно хочете видалити замовлення?')">Видалити</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <div class="total-box">
-        Загальна сума до сплати: <span id="total">0.00 грн</span>
-    </div>
-
-    <p style="text-align: center;">
-        <a id="bill-btn" href="/orders/bill/123" class="btn btn-primary">Перейти до замовлення</a>
-    </p>
+        <div class="total-box">
+            Загальна сума до сплати: <span id="total">0.00 грн</span>
+        </div>
+        <br>
+        <div class="btn_box" style="text-align: center;">
+            <a href="{% url 'confirm' %}" class="btn btn-primary">Підтвердити замовлення</a>
+            <a href="{% url 'delivery' %}" class="btn btn-primary">Назад</a>    
+        </div>
+    {% else %}
+        <p style="text-align: center; font-size: 1.2em; color: #888; padding: 40px;">
+            У вас немає замовлень
+        </p>
+        <p style="text-align: center;"><a href="{% url 'delivery' %}" class="btn btn-warning del-btn">Зробити замовлення</a></p>
+    {% endif %}
 </div>
-
 
 <style>
     body {
