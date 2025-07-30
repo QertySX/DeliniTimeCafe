@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Product, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.decorators import login_required
+
 
 def menu(request):
     products = Product.objects.all()
@@ -21,6 +23,7 @@ def menu(request):
     })
 
 
+@login_required(login_url='signin')
 def delivery(request):
     products = Product.objects.all()
     category = Category.objects.all()
