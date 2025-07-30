@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils import timezone
-from .models import Order
+from django.db import transaction
+from .models import Order, OrderHistory
 from django.core.mail import send_mail
+from django.contrib.auth.decorators import login_required
 
 
 def ajax_cart(request):
@@ -12,6 +14,7 @@ def ajax_cart(request):
     uid = request.GET['uid']
     pid = request.GET['pid']
     price = request.GET['price']
+    print(uid)
 
     response['uid'] = uid
     response['pid'] = pid
@@ -37,6 +40,7 @@ def ajax_cart_indicate(request):
     response = dict()
     uid = request.GET['uid']
     user_orders = Order.objects.filter(user_id=uid)
+    print(uid)
     # -> 
     total_price = 0
     for order in user_orders:
@@ -45,7 +49,7 @@ def ajax_cart_indicate(request):
     response['total_price'] = total_price
     return JsonResponse(response)
 
-
+@login_required(login_url='signin')
 def cart(request):
     return render(request, 'orders/order_book.html', context={
         'title': 'Управління кошиком',
@@ -60,7 +64,7 @@ def del_order(request, order_id):
     delete_order.delete()
     return redirect('cart')
 
-
+@login_required(login_url='signin')
 def confirm(request):
     if request.method == 'GET':
         return render(request, 'orders/confirm.html', context={
@@ -108,45 +112,32 @@ def confirm(request):
         # -> 
         success = send_mail(subject, '', 'DeliniTime.@gmail.com', [email], fail_silently=False, html_message=body)
         if success: 
-            return render(request, 'orders/thanks.html', context={
+            # Додавання даних у історію замовлень та видалення із таблиці для відображення замовлення
+            with transaction.atomic(): 
+                current_orders = Order.objects.filter(user_id=request.user.id)
+
+                for order in current_orders:
+                    history_order = OrderHistory(
+                        title=order.title,
+                        user=order.user,
+                        products=order.products,
+                        price=order.price,
+                        amount=order.amount,
+                        date=order.date,
+                    )
+                    history_order.save()
+                current_orders.delete() 
+
+                return render(request, 'orders/thanks.html', context={
                 'title': 'Подяка за замовлення',
                 'page': 'thanks',
                 'app': 'orders',
                 'email': email
             })
+            
         else:
             return render(request, 'orders/failed.html', context={
                 'title': 'Помилка поштового відправлення',
                 'page': 'failed',
                 'app': 'orders',
             })
-
-
-
-
-
-
-
-
-# def bill(request, sel_list: str):
-#     # -> 
-#     sel_list_str = sel_list.split(',')
-#     sel_list_num = [int(x) for x in sel_list_str[:-1]]
-#     total_price = int(sel_list_str[-1])
-#     final_list = []
-#     # -> 
-#     for order_id in sel_list_num:
-#         order = Order.objects.get(id=order_id)
-#         final_list.append({
-#             'product_name': order.products.name,
-#             'product_price': order.products.price,
-#         })
-#     # -> 
-#     return render(request, 'orders/bill.html', context={
-#         'title': 'Сторінка замовлення',
-#         'page': 'bill',
-#         'app': 'orders',
-#         'total_price': total_price,
-#         'final_list': final_list,
-#         'init_list': sel_list,
-#     })
