@@ -1,9 +1,13 @@
 {% extends '_layouts/base.html' %}
 
 {% load static %}
-
 {% block content %}
+<br>
+<br>
+<br>
+
 <div class="content-panel">
+    <!-- slider section -->
     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -12,19 +16,81 @@
               <div class="row">
                 <div class="col-md-7 col-lg-6 ">
                   <div class="detail-box">
-                    <br>
                     <h1>
-                        Home Cafe
+                      Ознайомтесь з нашим меню
                     </h1>
-                    <br>
                     <p>
-                      <h5>Затишна кав’ярня, де кава — у центрі уваги, а смачне меню доповнює кожен візит. Заходь на чашку ароматної кави чи обід, або замовляй доставку прямо до дверей</h5>
+Скуштуйте наші смачні страви з найкращих інгредієнтів. Від класики до авторських рецептів — у нас знайдеться щось для кожного. Насолоджуйтеся смаком і затишком</p>
+                    <div class="btn-box">
+                      <a href="{% url 'menu' %}" class="btn1">
+                        Переглянути
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Замовляйте доставку
+                    </h1>
+                    <p>
+                      Затишна кав’ярня, де кава — у центрі уваги, а смачне меню доповнює кожен візит. Заходь на чашку ароматної кави чи обід, або замовляй доставку прямо до дверей
                     </p>
                     <div class="btn-box">
                       <a href="{% url 'delivery' %}" class="btn1">
-                        Замовити доставку
+                        Замовити
                       </a>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item ">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Забронюйте столик просто зараз
+                    </h1>
+                    <p>
+                      Плануєте романтичну вечерю або зустріч з друзями?
+Обирайте зручний час, кількість гостей — ми подбаємо про затишну атмосферу та смачні страви.
+
+ Маєте побажання? Залиште коментар, і ми врахуємо кожну деталь.
+                    </p>
+                    <div class="btn-box">
+                      <a href="{% url 'book_table' %}" class="btn1">
+                        Забронювати
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="container ">
+              <div class="row">
+                <div class="col-md-7 col-lg-6 ">
+                  <div class="detail-box">
+                    <h1>
+                      Ваш відгук важливий для нас
+                    </h1>
+                    <p>
+                      Ми постійно прагнемо вдосконалюватися, тому будемо раді, якщо ви залишите свій відгук. Поділіться враженнями, побажаннями чи ідеями — це допоможе нам зробити наш сервіс ще зручнішим, якіснішим та приємнішим саме для вас.
+                    </p>
+                    <div class="btn-box">
+                      <a href="#reviews" class="btn1">
+                        Відгуки
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -32,7 +98,78 @@
             </div>
           </div>
         </div>
+        <div class="container">
+          <ol class="carousel-indicators">
+            <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+            <li data-target="#customCarousel1" data-slide-to="1"></li>
+            <li data-target="#customCarousel1" data-slide-to="2"></li>
+            <li data-target="#customCarousel1" data-slide-to="3"></li>
+          </ol>
+        </div>
       </div>
     </section>
+    <!-- end slider section -->
+  
+    <section id="reviews" class="client_section layout_padding-bottom" style="color: white;">
+    <div class="container">
+      <div class="heading_container heading_center psudo_white_primary mb_45">
+        <h2>Що кажуть наші відвідувачі</h2>
+        <br>
+      </div>
+      <div class="carousel-wrap">
+        <div class="owl-carousel client_owl-carousel">
+          {% for rev in reviews %}
+          <div class="item">
+            <div class="box">
+              <div class="detail-box">
+                <div class="review-header">
+                  <p class="reviewer-name"><strong>{{ rev.user.username }}</strong></p>
+                  <span class="review-date">{{ rev.created_at|date:"d M Y" }}</span>
+                </div>
+
+                <div class="rating">
+                  {% for i in "12345" %}
+                    {% if forloop.counter <= rev.rating %}
+                      <i class="fa fa-star checked"></i>
+                    {% else %}
+                      <i class="fa fa-star"></i>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <p class="review-text">{{ rev.text }}</p>
+                {% if request.user == rev.user %}
+                <div class="review-actions">
+                  <a href="{% url 'del_review' rev.id %}" class="action-btn">Видалити</a> 
+                  <a href="{% url 'edit_review' rev.id %}" class="action-btn">Змінити</a>
+                </div>
+                {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="btn-box2">
+        <a href="{% url 'add_reviews' %}" class="btn1 review-btn">
+          Залишити відгук
+        </a>
+      </div>
+
+    </section>
+  </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/cart_indicate.js' %}"></script>
+
 {% endblock %}
