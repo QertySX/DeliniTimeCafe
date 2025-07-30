@@ -52,47 +52,32 @@ def signin(request):
         return render(request, 'accounts/signin.html', context={
             'title': 'Логін',
             'page': 'signin',
-            'app':'accounts',
+            'app': 'accounts',
         })
+    
     elif request.method == 'POST':
-        # -> 
         login_x = request.POST.get('login')
         pass1_x = request.POST.get('pass1')
-        # -> 
+
         user = authenticate(request, username=login_x, password=pass1_x)
-        # -> 
+
         if user is not None:
             login(request, user)
-            color = 'green'
-            message = 'Авторизація успішна'
-        # - Користувач не знайдений або не активний
-        else:
-            try:
-                potential_user = User.objects.get(username=login_x)
-            except User.DoesNotExist:
-                potential_user = None
+            return JsonResponse({'status': 'success', 'message': 'Авторизація успішна'})
 
-            # - Користувач знайдений, але не активний:
-            if potential_user is not None and not potential_user.is_active:
-                color = 'red'
-                message = 'Ваш акаунт не активовано!'
-            # - Користувач не знайдений: 
-            else:
-                color = 'red'
-                message = 'Ваш акаунт не активований!'
+        try:
+            potential_user = User.objects.get(username=login_x)
+            if not potential_user.is_active:
+                return JsonResponse({'status': 'error', 'message': 'Ваш акаунт не активовано!'})
+        except User.DoesNotExist:
+            pass
 
-        return render(request, 'accounts/report.html', context={
-            'title': 'Звіт про авторизацію',
-            'page': 'report',
-            'app': 'accounts',
-            'color': color,
-            'message': message
-        })  
+        return JsonResponse({'status': 'error', 'message': 'Невірний логін або пароль'})
 
 
 def signout(request):
     logout(request)
-    return redirect('index')
+    return redirect('signin')
 
 
 def profile(request):
