@@ -1,0 +1,55 @@
+{% extends '_layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2 style="text-align: center; color: white;">
+          Напишіть свій відгук
+        </h2>
+      </div>
+      <div class="row" style="text-align: center;">
+        <div class="col-md-6">
+          <div class="form_container">
+            <form action="" method="post">
+              {% csrf_token %}
+              <div>
+                <select class="form-control nice-select wide" name="rating" required>
+                  <option value="" disabled selected >
+                    Оцінка
+                  </option>
+                  <option value="1">
+                    1
+                  </option>
+                  <option value="2">
+                    2
+                  </option>
+                  <option value="3">
+                    3
+                  </option>
+                  <option value="4">
+                    4
+                  </option>
+                  <option value="5">
+                    5
+                  </option>
+                </select>
+              </div>
+              <div>
+                <input type="text" class="form-control" placeholder="Ваші побажання або зауваження" name="text" required>
+              </div>
+              <div class="btn_box">
+                <button type="submit">Додати відгук</button>
+                  <button style="-webkit-text-fill-color: white;"><a href="{% url 'index' %}">На головну</a></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end book section -->
+
+{% endblock %}
