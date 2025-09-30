@@ -51,23 +51,23 @@
 **Example:**
 
 Головна сторінка сайту:  
-![Головна сторінка](screenshots/1.png)  
-![Головна сторінка](screenshots/2.png)  
+![Головна сторінка](root/screenshots/1.png)  
+![Головна сторінка](root/screenshots/2.png)  
 
 Сторінка меню:  
-![Меню](screenshots/3.png)  
+![Меню](root/screenshots/3.png)  
 
 Сторінка меню для доставки:  
-![Меню для доставки](screenshots/4.png)  
+![Меню для доставки](root/screenshots/4.png)  
 
 Сторінка About Us:  
-![about us](screenshots/5.png)  
+![about us](root/screenshots/5.png)  
 
 Сторінка бронювання столика:  
-![Бронювання столика](screenshots/6.png)  
+![Бронювання столика](root/screenshots/6.png)  
 
 Кошик замовлень:  
-![Кошик](screenshots/8.png)  
+![Кошик](root/screenshots/8.png)  
 
 Більше скріншотів у папці "screenshots".
 
