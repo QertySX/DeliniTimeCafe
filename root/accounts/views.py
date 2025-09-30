@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 from .utils import send_verification_email, check_verification_token
+from orders.models import OrderHistory
 
 
 def signup(request):
@@ -85,6 +86,7 @@ def profile(request):
         'title': 'Профіль',
         'page': 'profile',
         'app': 'accounts',
+        'user': request.user,
     })
 
 
